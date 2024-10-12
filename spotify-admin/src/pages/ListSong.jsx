@@ -26,7 +26,6 @@ const ListSong = () => {
                 await fetchSongs();
             }
         } catch (error) {
-            console.log("error");
             toast.error("Error Occur");
         }
     };
@@ -48,10 +47,11 @@ const ListSong = () => {
                     <b>Action</b>
                 </div>
                 {data.map((item, index) => {
+                    console.log(item);
                     return (
                         <div
                             key={index}
-                            className="grid grid-cols-[1fr_1fr_1fr] sm:grid-cols-[0.5fr_1fr_2fr_1fr_0.5fr] items-center gap-2.5 p-3 border-gray-300 text-sm mr-5">
+                            className="grid grid-cols-[1fr_1fr_1fr] sm:grid-cols-[0.5fr_1fr_2fr_1fr_0.5fr] items-center gap-2.5 p-3 border border-gray-300 text-sm mr-5">
                             <img className="w-12" src={item.image} alt="" />
                             <p>{item.name}</p>
                             <p>{item.album}</p>
