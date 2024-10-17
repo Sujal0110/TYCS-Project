@@ -4,11 +4,15 @@ import AlbumItem from "./AlbumItem";
 import SongItem from "./SongItem";
 import { PlayerContext } from "../context/PlayerContext";
 
-const DisplayHome = () => {
+const DisplayHome = ({ isLoggedIn, handleLogout, Chart }) => {
     const { songsData, albumsData } = useContext(PlayerContext);
     return (
         <>
-            <Navbar />
+            <Navbar
+                Chart={Chart}
+                isLoggedIn={isLoggedIn}
+                handleLogout={handleLogout}
+            />
             <div className="mb-4">
                 <h1 className="my-5 font-bold text-2xl">Featured Charts</h1>
                 <div className="flex overflow-auto">

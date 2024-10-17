@@ -4,7 +4,7 @@ import DisplayHome from "./DisplayHome";
 import DisplayAlbum from "./DisplayAlbum";
 import { PlayerContext } from "../context/PlayerContext";
 
-const Display = () => {
+const Display = ({ isLoggedIn, handleLogout, Chart }) => {
     const { albumsData } = useContext(PlayerContext);
 
     const displayRef = useRef();
@@ -30,7 +30,16 @@ const Display = () => {
             className="w-[100%] m-2 px-6 pt-4 rounded bg-[#121212] text-white overflow-auto lg:w-[75%] lg:ml-0">
             {albumsData.length > 0 ? (
                 <Routes>
-                    <Route path="/" element={<DisplayHome />} />
+                    <Route
+                        path="/"
+                        element={
+                            <DisplayHome
+                                Chart={Chart}
+                                isLoggedIn={isLoggedIn}
+                                handleLogout={handleLogout}
+                            />
+                        }
+                    />
                     <Route
                         path="/album/:id"
                         element={
