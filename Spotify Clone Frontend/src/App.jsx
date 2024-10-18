@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Player from "./components/Player";
 import Display from "./components/Display";
@@ -15,6 +15,7 @@ const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [Chart, setChart] = useState("");
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const navigate = useNavigate();
 
@@ -27,15 +28,18 @@ const App = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
+        localStorage.setItem("userEmail", email);
         setIsLoggedIn(true);
         navigate(-1);
         notifyLogin();
     };
+
     const handleSignup = (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
             toast.error("Passwords don't match!");
         } else {
+            localStorage.setItem("userEmail", email);
             setIsLoggedIn(true);
             navigate(-2);
             notifySignup();
@@ -43,8 +47,24 @@ const App = () => {
     };
     const handleLogout = () => {
         setIsLoggedIn(false);
+        localStorage.removeItem("userEmail");
     };
+    useEffect(() => {
+        const savedEmail = localStorage.getItem("userEmail");
+        if (savedEmail) {
+            setIsLoggedIn(true);
+            setEmail(savedEmail);
+        }
+    }, []);
 
+    useEffect(() => {
+        const savedEmail = localStorage.getItem("userEmail");
+        if (savedEmail) {
+            setChart(savedEmail.charAt(0).toUpperCase());
+        } else {
+            setChart("");
+        }
+    }, [isLoggedIn]);
     return (
         <>
             <ToastContainer />
@@ -77,7 +97,14 @@ const App = () => {
                 <Route
                     path="/login"
                     element={
-                        <Login setChart={setChart} handleLogin={handleLogin} />
+                        <Login
+                            email={email}
+                            setEmail={setEmail}
+                            password={password}
+                            setPassword={setPassword}
+                            setChart={setChart}
+                            handleLogin={handleLogin}
+                        />
                     }
                 />
                 <Route
@@ -86,6 +113,8 @@ const App = () => {
                         <SignUp
                             setChart={setChart}
                             handleSignup={handleSignup}
+                            email={email}
+                            setEmail={setEmail}
                             password={password}
                             setPassword={setPassword}
                             confirmPassword={confirmPassword}
