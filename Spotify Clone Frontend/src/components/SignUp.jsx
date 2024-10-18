@@ -3,19 +3,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = ({
-    setChart,
     handleSignup,
+    email,
+    setEmail,
     password,
     setPassword,
     confirmPassword,
     setConfirmPassword,
 }) => {
-    const [email, setEmail] = useState("");
-
-    const getChar = () => {
-        setChart(email.charAt(0).toUpperCase());
-    };
-
     return (
         <div className="flex items-center justify-center h-screen bg-gray-900">
             <div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
@@ -76,7 +71,6 @@ const SignUp = ({
                         type="submit"
                         onClick={(e) => {
                             handleSignup(e);
-                            getChar();
                         }}
                         className="w-full py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
                         Sign Up

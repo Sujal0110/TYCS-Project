@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Login = ({ handleLogin, setChart }) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const getChar = () => {
-        setChart(email.charAt(0).toUpperCase());
-    };
+const Login = ({
+    handleLogin,
+    email,
+    setEmail,
+    password,
+    setPassword,
+}) => {
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-900">
@@ -53,7 +53,6 @@ const Login = ({ handleLogin, setChart }) => {
                         type="submit"
                         onClick={(e) => {
                             handleLogin(e);
-                            getChar();
                         }}
                         className="w-full py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
                         Log In

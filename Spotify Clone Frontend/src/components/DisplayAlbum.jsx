@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { assets } from "../assets/frontend-assets/assets";
 import { PlayerContext } from "../context/PlayerContext";
 
-const DisplayAlbum = ({ album }) => {
+const DisplayAlbum = ({ album, isLoggedIn, handleLogout, Chart }) => {
     const { id } = useParams();
     const [albumData, setAlbumData] = useState("");
     const { playWithId, albumsData, songsData } = useContext(PlayerContext);
@@ -19,7 +19,11 @@ const DisplayAlbum = ({ album }) => {
 
     return albumData ? (
         <>
-            <Navbar />
+            <Navbar
+                Chart={Chart}
+                isLoggedIn={isLoggedIn}
+                handleLogout={handleLogout}
+            />
             <div className="mt-10 flex gap-8 flex-col md:flex-row md:items-end">
                 <img className="w-48 rounded" src={albumData.image} alt="" />
                 <div className="flex flex-col ">

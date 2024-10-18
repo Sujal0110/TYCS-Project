@@ -45,6 +45,9 @@ const Display = ({ isLoggedIn, handleLogout, Chart }) => {
                         element={
                             <DisplayAlbum
                                 album={albumsData.find((x) => x._id == albumId)}
+                                Chart={Chart}
+                                isLoggedIn={isLoggedIn}
+                                handleLogout={handleLogout}
                             />
                         }
                     />
