@@ -28,6 +28,7 @@ const PlayerContextProvider = (props) => {
         audioRef.current.play();
         setPlayerStatus(true);
     };
+
     const pause = () => {
         audioRef.current.pause();
         setPlayerStatus(false);
@@ -52,6 +53,7 @@ const PlayerContextProvider = (props) => {
             }
         });
     };
+
     const next = async () => {
         songsData.map(async (item, index) => {
             if (track._id === item._id && index < songsData.length) {
@@ -75,6 +77,7 @@ const PlayerContextProvider = (props) => {
             setTrack(response.data.songs[0]);
         } catch (error) {}
     };
+    
     const getAlbumsData = async () => {
         try {
             const response = await axios.get(`${url}/api/album/list`);
